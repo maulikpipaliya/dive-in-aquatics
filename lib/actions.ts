@@ -1,5 +1,3 @@
-'use server';
-
 import { CreateLeadInput } from './db-schema';
 
 export async function createLead(data: CreateLeadInput) {
