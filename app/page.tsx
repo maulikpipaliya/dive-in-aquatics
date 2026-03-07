@@ -17,26 +17,40 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="-mt-20">
-      <section className="relative bg-gradient-to-br from-brand-blue-light via-brand-blue to-brand-blue-dark text-white py-24 md:py-32 min-h-screen flex items-center">
+      <section className="relative bg-gradient-to-br from-blue-50 to-cyan-50 py-24 md:py-32 min-h-screen flex items-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Dive Into Your Swimming Journey
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Professional swimming classes for all ages. Learn from certified coaches in a safe, supportive environment.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact?trial=true">
-                <Button size="lg" className="bg-white text-brand-blue hover:bg-gray-100 text-lg px-8">
-                  Book a Free Trial
-                </Button>
-              </Link>
-              <Link href="/programs">
-                <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:!bg-white hover:!text-brand-blue text-lg px-8 font-semibold bg-transparent">
-                  View Programs
-                </Button>
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative flex items-center justify-center">
+              <div className="relative w-full max-w-md aspect-square">
+                <Image
+                  src="/assets/logo-circle.png"
+                  alt="Dive-In Aquatics Logo"
+                  fill
+                  className="object-contain opacity-90"
+                  priority
+                />
+              </div>
+            </div>
+            
+            <div className="text-gray-900">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-brand-blue">
+                Dive Into Your Swimming Journey
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-gray-700">
+                Professional swimming classes for all ages. Learn from certified coaches in a safe, supportive environment.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/contact?trial=true">
+                  <Button size="lg" className="bg-brand-blue text-white hover:bg-brand-blue-dark text-lg px-8">
+                    Book a Free Trial
+                  </Button>
+                </Link>
+                <Link href="/programs">
+                  <Button size="lg" variant="outline" className="border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white text-lg px-8 font-semibold">
+                    View Programs
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
