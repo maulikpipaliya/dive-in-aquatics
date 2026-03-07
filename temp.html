@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dive In Aquatics</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #0a4d68 0%, #088395 100%);
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .title {
+        position: fixed;
+        top: 30px;
+        width: 100%;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">Dive In Aquatics</div>
+    <canvas id="water"></canvas>
+
+    <script>
+      const canvas = document.getElementById("water");
+      const ctx = canvas.getContext("2d");
+
+      let width, height;
+      let buffer1, buffer2;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+
+        buffer1 = new Float32Array(width * height);
+        buffer2 = new Float32Array(width * height);
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      function disturb(x, y, radius = 15, strength = 150) {
+        for (let dy = -radius; dy <= radius; dy++) {
+          for (let dx = -radius; dx <= radius; dx++) {
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist <= radius) {
+              let nx = x + dx;
+              let ny = y + dy;
+              if (nx > 0 && nx < width && ny > 0 && ny < height) {
+                let falloff = 1 - (dist / radius);
+                buffer1[ny * width + nx] = strength * falloff;
+              }
+            }
+          }
+        }
+      }
+
+      canvas.addEventListener("mousemove", (e) => {
+        disturb(e.clientX, e.clientY);
+      });
+
+      function update() {
+        for (let i = width; i < width * height - width; i++) {
+          buffer2[i] =
+            (buffer1[i - 1] + buffer1[i + 1] + buffer1[i - width] + buffer1[i + width]) / 2 -
+            buffer2[i];
+
+          buffer2[i] *= 0.99; // damping
+        }
+
+        let imageData = ctx.createImageData(width, height);
+        let data = imageData.data;
+
+        for (let i = 0; i < buffer2.length; i++) {
+          let x = i % width;
+          let y = Math.floor(i / width);
+          let wave = buffer2[i];
+
+          // Create depth gradient (darker at bottom)
+          let depthFactor = y / height;
+          
+          // Pool water colors - turquoise to deep blue
+          let baseRed = 8 + depthFactor * 20;
+          let baseGreen = 131 + depthFactor * 20;
+          let baseBlue = 149 + depthFactor * 50;
+
+          // Add caustic-like light patterns
+          let caustic = Math.sin(x * 0.02 + Date.now() * 0.001) * 
+                        Math.cos(y * 0.02 + Date.now() * 0.0015) * 15;
+          
+          // Wave refraction effect
+          let refraction = wave * 0.8;
+          
+          let red = Math.max(0, Math.min(255, baseRed + refraction + caustic * 0.3));
+          let green = Math.max(0, Math.min(255, baseGreen + refraction + caustic * 0.6));
+          let blue = Math.max(0, Math.min(255, baseBlue + refraction + caustic * 0.8));
+
+          data[i * 4] = red;
+          data[i * 4 + 1] = green;
+          data[i * 4 + 2] = blue;
+          data[i * 4 + 3] = 255;
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
+        [buffer1, buffer2] = [buffer2, buffer1];
+        requestAnimationFrame(update);
+      }
+
+      update();
+    </script>
+  </body>
+</html>
