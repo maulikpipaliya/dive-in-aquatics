@@ -1,5 +1,4 @@
-import { ContactForm } from '@/components/contact-form';
-import { TrialForm } from '@/components/trial-form';
+import { ContactFormWrapper } from '@/components/contact-form-wrapper';
 import { Card, CardContent } from '@/components/ui/card';
 import { SITE_CONFIG } from '@/lib/constants';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
@@ -13,29 +12,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ trial?: string }>;
-}) {
-  const params = await searchParams;
-  const showTrialForm = params.trial === 'true';
-
+export default function ContactPage() {
   return (
     <div className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {showTrialForm
-              ? 'Book your free trial class and experience our world-class swimming program'
-              : 'Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.'}
+            Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           <div>
-            {showTrialForm ? <TrialForm /> : <ContactForm />}
+            <ContactFormWrapper />
           </div>
 
           <div className="space-y-6">

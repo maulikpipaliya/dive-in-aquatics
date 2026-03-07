@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   output: 'export',
+  outputFileTracingRoot: __dirname,
 };
 
 export default nextConfig;
