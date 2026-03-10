@@ -42,9 +42,9 @@ export function Header() {
               <Image
                 src="/assets/logo-circle.png"
                 alt="Dive-In Aquatics"
-                width={60}
-                height={60}
-                className="w-14 h-14 md:w-16 md:h-16"
+                width={100}
+                height={100}
+                className="w-20 h-20 md:w-24 md:h-24"
               />
               <span className="text-xl md:text-2xl font-bold text-gray-900">
                 Dive-In <span className="text-brand-blue">Aquatics</span>
@@ -61,9 +61,9 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Link href="/contact?trial=true">
+              <Link href="/contact">
                 <Button className="bg-brand-blue hover:bg-brand-blue-dark">
-                  Book a Trial
+                  Register Now
                 </Button>
               </Link>
             </div>
@@ -101,13 +101,13 @@ export function Header() {
               ))}
               <button
                 onClick={() => {
-                  router.push('/contact?trial=true');
+                  router.push('/contact');
                   setTimeout(() => setIsMobileMenuOpen(false), 100);
                 }}
                 className="px-4 pt-2 w-full"
               >
                 <Button className="w-full bg-brand-blue hover:bg-brand-blue-dark py-6 text-lg active:bg-brand-blue-dark">
-                  Book a Trial
+                  Register Now
                 </Button>
               </button>
             </div>

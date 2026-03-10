@@ -52,11 +52,9 @@ export default function ProgramsPage() {
                 </div>
                 <div className="md:w-1/3 bg-gradient-to-br from-brand-blue-light to-brand-blue flex items-center justify-center p-8">
                   <div className="text-center text-white">
-                    <p className="text-sm uppercase tracking-wide mb-2">Starting from</p>
-                    <p className="text-4xl font-bold mb-4">₹3,000</p>
                     <Link href="/schedule">
-                      <Button variant="secondary" className="w-full">
-                        View Schedule
+                      <Button variant="secondary" className="w-full text-lg py-6">
+                        View Plans
                       </Button>
                     </Link>
                   </div>
@@ -66,14 +64,14 @@ export default function ProgramsPage() {
           ))}
         </div>
 
-        <div className="mt-16 text-center bg-gray-50 rounded-lg p-12">
-          <h2 className="text-3xl font-bold mb-4">Not Sure Which Program is Right for You?</h2>
-          <p className="text-lg text-gray-600 mb-6">
-            Book a free trial class and our coaches will help you find the perfect fit.
+        <div className="mt-16 text-center bg-gradient-to-br from-brand-blue-light to-brand-blue text-white rounded-lg p-12">
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Swimming Journey?</h2>
+          <p className="text-lg mb-6 text-white/90">
+            Register now and join our community of swimmers
           </p>
-          <Link href="/contact?trial=true">
-            <Button size="lg" className="bg-brand-blue hover:bg-brand-blue-dark">
-              Book a Free Trial Class
+          <Link href="/contact">
+            <Button size="lg" className="bg-white text-brand-blue hover:bg-gray-100 text-lg px-8">
+              Register Now
             </Button>
           </Link>
         </div>
