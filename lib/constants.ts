@@ -16,7 +16,7 @@ export const SITE_CONFIG = {
   },
   social: {
     facebook: 'https://facebook.com/diveinaquatics',
-    instagram: 'https://instagram.com/diveinaquatics',
+    instagram: 'https://www.instagram.com/divein.aquatics',
     youtube: 'https://youtube.com/@diveinaquatics',
   },
 };
